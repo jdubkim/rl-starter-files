@@ -56,8 +56,8 @@ parser.add_argument("--optim-alpha", type=float, default=0.99,
                     help="RMSprop optimizer alpha (default: 0.99)")
 parser.add_argument("--clip-eps", type=float, default=0.2,
                     help="clipping epsilon for PPO (default: 0.2)")
-parser.add_argument("--recurrence", type=int, default=10,
-                    help="number of time-steps gradient is backpropagated (default: 1). If > 1, a LSTM is added to the model to have memory.")
+parser.add_argument("--recurrence", type=int, default=8,
+                    help="number of time-steps gradient is backpropagated (default: 8). If > 1, a LSTM is added to the model to have memory.")
 parser.add_argument("--text", action="store_true", default=False,
                     help="add a GRU to the model to handle text input")
 
@@ -65,6 +65,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     args.mem = args.recurrence > 1
+    if args.mem:
+        args.frames_per_proc = args.recurrence
 
     # Set run dir
     date = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
