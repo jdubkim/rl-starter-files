@@ -1,5 +1,5 @@
 import multiprocessing
-import gymnasium as gym
+import gym
 
 
 multiprocessing.set_start_method("fork")
