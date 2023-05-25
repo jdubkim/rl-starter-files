@@ -73,8 +73,7 @@ if __name__ == "__main__":
 
     while log_done_counter < args.episodes:
         actions = agent.get_actions(obss)
-        obss, rewards, terminateds, truncateds, _ = env.step(actions)
-        dones = tuple(a | b for a, b in zip(terminateds, truncateds))
+        obss, rewards, dones, _ = env.step(actions)
         agent.analyze_feedbacks(rewards, dones)
 
         log_episode_return += torch.tensor(rewards, device=device, dtype=torch.float)

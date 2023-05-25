@@ -68,7 +68,6 @@ if __name__ == "__main__":
     args.mem = args.recurrence > 1
 
     # Set run dir
-
     date = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
     default_model_name = f"{args.env}_{args.algo}_seed{args.seed}_{date}"
 
@@ -76,29 +75,25 @@ if __name__ == "__main__":
     model_dir = utils.get_model_dir(model_name)
 
     # Load loggers and Tensorboard writer
-
     txt_logger = utils.get_txt_logger(model_dir)
     csv_file, csv_logger = utils.get_csv_logger(model_dir)
     tb_writer = tensorboardX.SummaryWriter(model_dir)
 
     # Log command and all script arguments
-
     txt_logger.info("{}\n".format(" ".join(sys.argv)))
     txt_logger.info("{}\n".format(args))
 
     # Set seed for all randomness sources
-
     utils.seed(args.seed)
 
     # Set device
-
     txt_logger.info(f"Device: {device}\n")
 
     # Load environments
-
     envs = []
     for i in range(args.procs):
         envs.append(utils.make_env(args.env, args.seed + 10000 * i))
+    print("Envs: ", envs)
     txt_logger.info("Environments loaded\n")
 
     # Load training status

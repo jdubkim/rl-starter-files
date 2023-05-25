@@ -10,6 +10,7 @@ import utils
 
 
 def get_obss_preprocessor(obs_space):
+
     # Check if obs_space is an image space
     if isinstance(obs_space, gym.spaces.Box):
         obs_space = {"image": obs_space.shape}
@@ -20,7 +21,7 @@ def get_obss_preprocessor(obs_space):
             })
 
     # Check if it is a MiniGrid observation space
-    elif isinstance(obs_space, gym.spaces.Dict) and "image" in obs_space.spaces.keys():
+    elif "image" in obs_space.spaces.keys():
         obs_space = {"image": obs_space.spaces["image"].shape, "text": 100}
 
         vocab = Vocabulary(obs_space["text"])
@@ -34,6 +35,7 @@ def get_obss_preprocessor(obs_space):
         preprocess_obss.vocab = vocab
 
     else:
+
         raise ValueError("Unknown observation space: " + str(obs_space))
 
     return obs_space, preprocess_obss

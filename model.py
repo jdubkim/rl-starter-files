@@ -36,7 +36,7 @@ class ACModel(nn.Module, torch_ac.RecurrentACModel):
         )
         n = obs_space["image"][0]
         m = obs_space["image"][1]
-        self.image_embedding_size = 4*4*256 
+        self.image_embedding_size = 256
 
         # Define memory
         if self.use_memory:
