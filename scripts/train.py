@@ -28,20 +28,20 @@ parser.add_argument("--save-interval", type=int, default=10,
                     help="number of updates between two saves (default: 10, 0 means no saving)")
 parser.add_argument("--procs", type=int, default=4,
                     help="number of processes (default: 4)")
-parser.add_argument("--frames", type=int, default=10**7,
+parser.add_argument("--frames", type=int, default=3*10**6,
                     help="number of frames of training (default: 1e7)")
 
 # Parameters for main algorithm
-parser.add_argument("--epochs", type=int, default=4,
-                    help="number of epochs for PPO (default: 4)")
-parser.add_argument("--batch-size", type=int, default=256,
-                    help="batch size for PPO (default: 256)")
+parser.add_argument("--epochs", type=int, default=10,
+                    help="number of epochs for PPO (default: 10)")
+parser.add_argument("--batch-size", type=int, default=64,
+                    help="batch size for PPO (default: 64)")
 parser.add_argument("--frames-per-proc", type=int, default=None,
                     help="number of frames per process before update (default: 5 for A2C and 128 for PPO)")
 parser.add_argument("--discount", type=float, default=0.99,
                     help="discount factor (default: 0.99)")
-parser.add_argument("--lr", type=float, default=0.001,
-                    help="learning rate (default: 0.001)")
+parser.add_argument("--lr", type=float, default=3e-4,
+                    help="learning rate (default: 3e-4)")
 parser.add_argument("--gae-lambda", type=float, default=0.95,
                     help="lambda coefficient in GAE formula (default: 0.95, 1 means no gae)")
 parser.add_argument("--entropy-coef", type=float, default=0.01,
@@ -56,7 +56,7 @@ parser.add_argument("--optim-alpha", type=float, default=0.99,
                     help="RMSprop optimizer alpha (default: 0.99)")
 parser.add_argument("--clip-eps", type=float, default=0.2,
                     help="clipping epsilon for PPO (default: 0.2)")
-parser.add_argument("--recurrence", type=int, default=1,
+parser.add_argument("--recurrence", type=int, default=10,
                     help="number of time-steps gradient is backpropagated (default: 1). If > 1, a LSTM is added to the model to have memory.")
 parser.add_argument("--text", action="store_true", default=False,
                     help="add a GRU to the model to handle text input")
