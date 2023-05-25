@@ -11,7 +11,6 @@ from model import ACModel
 
 
 # Parse arguments
-
 parser = argparse.ArgumentParser()
 
 # General parameters
@@ -27,8 +26,8 @@ parser.add_argument("--log-interval", type=int, default=1,
                     help="number of updates between two logs (default: 1)")
 parser.add_argument("--save-interval", type=int, default=10,
                     help="number of updates between two saves (default: 10, 0 means no saving)")
-parser.add_argument("--procs", type=int, default=16,
-                    help="number of processes (default: 16)")
+parser.add_argument("--procs", type=int, default=4,
+                    help="number of processes (default: 4)")
 parser.add_argument("--frames", type=int, default=10**7,
                     help="number of frames of training (default: 1e7)")
 
@@ -93,7 +92,6 @@ if __name__ == "__main__":
     envs = []
     for i in range(args.procs):
         envs.append(utils.make_env(args.env, args.seed + 10000 * i))
-    print("Envs: ", envs)
     txt_logger.info("Environments loaded\n")
 
     # Load training status
